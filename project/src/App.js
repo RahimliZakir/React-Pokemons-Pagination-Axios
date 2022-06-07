@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Container, Row, Col, FormControl } from "react-bootstrap";
 
 import API from "./api";
 import Pokemon from "./components/Pokemon";
 
 const App = () => {
+  const searchRef = useRef(null);
   const [pokemons, setPokemons] = useState([]);
   const [search, setSearch] = useState("");
 
@@ -19,29 +20,32 @@ const App = () => {
 
   useEffect(() => {
     getPokemons();
+
+    searchRef.current.focus();
   }, []);
 
   const filteredPokemons = pokemons?.results?.filter((item) => {
     if (search === "") {
       return pokemons;
     } else {
-      return item.name.indexOf(search) !== -1;
+      //* 1st Way
+      // return item.name.indexOf(search.toLowerCase()) !== -1;
+
+      //* 2n Way
+      return item.name.includes(search.toLowerCase());
     }
   });
 
-  // const handlePokemonSearch = (e) => {
-  //   setSearch(e.target.value);
-  // };
-
   return (
-    <div className="App">
+    <div className="App py-3">
       <Container>
         <Row>
-          <h1 className="text-center">Pokemons API</h1>
+          <h1 className="text-center mb-5">Pokémons API</h1>
           <Col md={12}>
             <FormControl
               type="text"
               placeholder="Search here..."
+              ref={searchRef}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />

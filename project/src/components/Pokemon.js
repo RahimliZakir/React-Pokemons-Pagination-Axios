@@ -1,22 +1,19 @@
 import React from "react";
 
-import { Col, Card, Button } from "react-bootstrap";
+import { capitalize } from "../utils/capitalize";
+
+import { Col, Card } from "react-bootstrap";
 
 const Pokemon = ({ cardItem, cardIndex }) => {
   return (
-    <Col md={3} className="mt-3">
+    <Col md={3} className="mt-5">
       <Card style={{ width: "18rem" }}>
         <Card.Img
           variant="top"
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${cardIndex}.png`}
         />
         <Card.Body className="text-center">
-          <Card.Title>{cardItem.name}</Card.Title>
-          <Card.Text>
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </Card.Text>
-          <Button variant="primary">Go somewhere</Button>
+          <Card.Title>{capitalize(cardItem.name)}</Card.Title>
         </Card.Body>
       </Card>
     </Col>
