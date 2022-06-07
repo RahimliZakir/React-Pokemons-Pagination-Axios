@@ -20,7 +20,14 @@ const App = () => {
   useEffect(() => {
     getPokemons();
   }, []);
-  console.log(pokemons);
+
+  const filteredPokemons = pokemons?.results?.filter((item) => {
+    if (search === "") {
+      return pokemons;
+    } else {
+      return item.name.indexOf(search) !== -1;
+    }
+  });
 
   // const handlePokemonSearch = (e) => {
   //   setSearch(e.target.value);
@@ -39,27 +46,15 @@ const App = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           </Col>
-          {pokemons?.results
-            ?.filter((item) => {
-              if (search === "") {
-                return pokemons;
-              } else {
-                return item.name.indexOf(search) !== -1;
-              }
-            })
-            .map((item, index) => {
-              return (
-                <Pokemon
-                  key={item.url}
-                  cardItem={item}
-                  cardIndex={
-                    item.url.slice(-3, -1) >= 10
-                      ? item.url.slice(-3, -1)
-                      : item.url.slice(-2, -1)
-                  }
-                />
-              );
-            })}
+          {filteredPokemons?.map((item, index) => {
+            return (
+              <Pokemon
+                key={item.url}
+                cardItem={item}
+                cardIndex={item.url.slice(33, item.url.length - 1)}
+              />
+            );
+          })}
         </Row>
       </Container>
     </div>
