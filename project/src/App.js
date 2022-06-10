@@ -10,6 +10,7 @@ import Pokemon from "./components/Pokemon";
 
 //* 2. react-paginate
 import ReactPaginate from "react-paginate";
+import "./dumb/react-paginate";
 //* 2. react-paginate
 
 const App = () => {
