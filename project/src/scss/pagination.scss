@@ -73,57 +73,69 @@
 //* 1. react-pagination
 
 //* 2. react-paginate
-ul,
-ol {
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 5% !important;
-  user-select: none;
+// ul,
+// ol {
+//   list-style-type: none;
+//   padding: 0;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   margin-top: 5% !important;
+//   user-select: none;
 
-  & > li.disabled {
-    a {
-      cursor: default;
-    }
-  }
-}
+//   & > li.disabled {
+//     a {
+//       cursor: default;
+//     }
+//   }
+// }
 
-ul.list-group {
-  flex-direction: row;
-}
+// ul.list-group {
+//   flex-direction: row;
+// }
 
-li {
-  a {
-    position: relative;
-    display: block;
-    padding: 0.5rem 1rem;
-    color: #212529;
-    text-decoration: none;
-    background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-  }
+// li {
+//   a {
+//     position: relative;
+//     display: block;
+//     padding: 0.5rem 1rem;
+//     color: #212529;
+//     text-decoration: none;
+//     background-color: #fff;
+//     border: 1px solid rgba(0, 0, 0, 0.125);
+//   }
 
-  &.selected {
-    a {
-      background-color: #0d6efd;
-      color: #ffffff !important;
-    }
-  }
+//   &.selected {
+//     a {
+//       background-color: #0d6efd;
+//       color: #ffffff !important;
+//     }
+//   }
 
-  &.previous,
-  &.next {
-    a {
-      color: cornflowerblue;
-    }
-  }
+//   &.previous,
+//   &.next {
+//     a {
+//       color: cornflowerblue;
+//     }
+//   }
 
-  &.previous.disabled,
-  &.next.disabled {
-    a {
-      color: gray;
-    }
-  }
-}
+//   &.previous.disabled,
+//   &.next.disabled {
+//     a {
+//       color: gray;
+//     }
+//   }
+// }
 //* 2. react-paginate
+
+//* 3. Custom Pagination
+.pagination {
+  justify-content: center;
+  margin-top: 3.5%;
+}
+
+.page-link.selected {
+  background-color: #0d6efd;
+  color: #ffffff;
+}
+//* 3. Custom Pagination

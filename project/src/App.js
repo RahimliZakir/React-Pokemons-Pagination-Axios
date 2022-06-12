@@ -129,7 +129,14 @@ const App = () => {
   // Get Current Pokemons
 
   // Change Page
-  const paginate = (pageNumber) => setPageIndex(pageNumber);
+  const paginate = (pageNumber, e) => {
+    const pageLinks = document.querySelectorAll(".page-link");
+    pageLinks.forEach((item) => item.classList.remove("selected"));
+
+    e.target.className += " selected";
+
+    setPageIndex(pageNumber);
+  };
   // Change Page
   //* 3. Custom Pagination
 
