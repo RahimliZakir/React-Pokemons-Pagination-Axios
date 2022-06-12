@@ -1,3 +1,4 @@
+//* 2. react-paginate
 window.onload = () => {
   const ul = document.querySelector("ul");
   ul.className = "list-group";
@@ -7,3 +8,5 @@ window.onload = () => {
     item.children[0].classList.add("list-group-item")
   );
 };
+
+//* 2. react-paginate

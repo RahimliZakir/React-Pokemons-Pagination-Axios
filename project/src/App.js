@@ -9,11 +9,30 @@ import Pokemon from "./components/Pokemon";
 //* 1. react-pagination
 
 //* 2. react-paginate
-import ReactPaginate from "react-paginate";
-import "./dumb/react-paginate";
+// import ReactPaginate from "react-paginate";
+//TODO: 1. External JS - import like style
+// import "./dumb/react-paginate";
+//TODO: 1. External JS - import like style
 //* 2. react-paginate
 
+//TODO: 2. External JS - with custom hook
+// import ExternalJS from "./components/ExternalJS";
+//TODO: 2. External JS - with custom hook
+
 const App = () => {
+  //TODO: 2. External JS - with custom hook
+  // ExternalJS(
+  //   "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js"
+  // );
+  //TODO: 2. External JS - with custom hook
+
+  //TODO: 3. External JS - componentDidMount - useEffect
+  // useEffect(() => {
+  //   const body = document.querySelector("body");
+  //   body.style.backgroundColor = "black";
+  // }, []);
+  //TODO: 3. External JS - componentDidMount - useEffect
+
   const searchRef = useRef(null);
   const [pokemons, setPokemons] = useState([]);
   const [search, setSearch] = useState("");
@@ -57,30 +76,33 @@ const App = () => {
   //   return filteredPokemons?.slice(firstPageIndex, lastPageIndex);
   // }, [currentPage, filteredPokemons]);
   //* 1. react-pagination
-  // We start with an empty list of items.
-  const [currentItems, setCurrentItems] = useState(null);
-  const [pageCount, setPageCount] = useState(0);
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
-  const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 15;
-  useEffect(() => {
-    // Fetch items from another resources.
-    const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-    setCurrentItems(filteredPokemons?.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(filteredPokemons?.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, filteredPokemons]);
 
-  // Invoke when user click to request another page.
-  const handlePageClick = (event) => {
-    const newOffset =
-      (event.selected * itemsPerPage) % filteredPokemons?.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-  };
+  //* 2. react-paginate
+  // // We start with an empty list of items.
+  // const [currentItems, setCurrentItems] = useState(null);
+  // const [pageCount, setPageCount] = useState(0);
+  // // Here we use item offsets; we could also use page offsets
+  // // following the API or data you're working with.
+  // const [itemOffset, setItemOffset] = useState(0);
+  // const itemsPerPage = 15;
+  // useEffect(() => {
+  //   // Fetch items from another resources.
+  //   const endOffset = itemOffset + itemsPerPage;
+  //   console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  //   setCurrentItems(filteredPokemons?.slice(itemOffset, endOffset));
+  //   setPageCount(Math.ceil(filteredPokemons?.length / itemsPerPage));
+  // }, [itemOffset, itemsPerPage, filteredPokemons]);
+
+  // // Invoke when user click to request another page.
+  // const handlePageClick = (event) => {
+  //   const newOffset =
+  //     (event.selected * itemsPerPage) % filteredPokemons?.length;
+  //   console.log(
+  //     `User requested page number ${event.selected}, which is offset ${newOffset}`
+  //   );
+  //   setItemOffset(newOffset);
+  // };
+  //* 2. react-paginate
 
   return (
     <div className="App py-3">
@@ -96,7 +118,7 @@ const App = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           </Col>
-          {currentItems?.map((item) => {
+          {filteredPokemons?.map((item) => {
             return (
               <Pokemon
                 key={item.url}
@@ -116,15 +138,19 @@ const App = () => {
           /> */
             //* 1. react-pagination
           }
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="next >"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={3}
-            pageCount={pageCount}
-            previousLabel="< previous"
-            renderOnZeroPageCount={null}
-          />
+          {
+            //* 2. react-paginate
+            // <ReactPaginate
+            //   breakLabel="..."
+            //   nextLabel="next >"
+            //   onPageChange={handlePageClick}
+            //   pageRangeDisplayed={3}
+            //   pageCount={pageCount}
+            //   previousLabel="< previous"
+            //   renderOnZeroPageCount={null}
+            // />
+            //* 2. react-paginate
+          }
         </Row>
       </Container>
     </div>
