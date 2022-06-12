@@ -1,39 +1,60 @@
-import React, { useEffect } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleLeft, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import { useEffect } from "react";
 
-const CustomPagination = ({ pageSize, totalItems, paginate }) => {
+const CustomPagination = ({
+  pageSize,
+  totalItems,
+  paginate,
+  prev,
+  next,
+  getLastPageIndex,
+}) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalItems / pageSize); i++) {
     pageNumbers.push(i);
   }
 
-  window.addEventListener("load", () => {
-    const pageLinks = document.querySelectorAll(".page-link");
-    if (pageLinks !== undefined) {
-      pageLinks[0].className += " selected";
-    }
-  });
+  useEffect(() => {
+    getLastPageIndex(pageNumbers[pageNumbers.length - 1]);
+  }, [getLastPageIndex]);
 
   return (
     <nav>
       <ul className="pagination">
+        {/*eslint-disable*/}
+        <li className="page-item">
+          <a className="page-link prev" onClick={prev}>
+            <FontAwesomeIcon icon={faAngleLeft} />
+          </a>
+        </li>
         {pageNumbers.map((number) => {
           return (
             <li key={number} className="page-item">
               {
-                /*eslint-disable*/
                 <a
-                  className="page-link"
-                  onClick={(e) => paginate(number, e)}
+                  className={`page-link nums ${number == 1 ? "selected" : ""}`}
+                  onClick={(e) =>
+                    paginate(number, pageNumbers[pageNumbers.length - 1], e)
+                  }
                   style={{ cursor: "pointer" }}
                 >
                   {number}
                 </a>
-                /*eslint-enable*/
               }
             </li>
           );
         })}
+        <li className="page-item">
+          <a
+            className="page-link next"
+            onClick={() => next(pageNumbers[pageNumbers.length - 1])}
+          >
+            <FontAwesomeIcon icon={faAngleRight} />
+          </a>
+        </li>
+        {/*eslint-enable*/}
       </ul>
     </nav>
   );

@@ -129,14 +129,62 @@ const App = () => {
   // Get Current Pokemons
 
   // Change Page
-  const paginate = (pageNumber, e) => {
+  const paginate = (pageNumber, lastNum, e) => {
     const pageLinks = document.querySelectorAll(".page-link");
     pageLinks.forEach((item) => item.classList.remove("selected"));
 
     e.target.className += " selected";
 
     setPageIndex(pageNumber);
+
+    setLastPageIndex(lastNum);
   };
+
+  const prev = () => {
+    const activePageLink = document.querySelector(".page-link.selected");
+    const prevPageLink =
+      activePageLink.parentElement.previousElementSibling.children[0];
+
+    activePageLink.classList.remove("selected");
+    prevPageLink.classList.add("selected");
+
+    setPageIndex(pageIndex - 1);
+  };
+
+  const [lastPageIndex, setLastPageIndex] = useState(0);
+  const getLastPageIndex = (lastNum) => {
+    setLastPageIndex(lastNum);
+  };
+
+  const next = (lastNum) => {
+    const activePageLink = document.querySelector(".page-link.selected");
+    const nextPageLink =
+      activePageLink.parentElement.nextElementSibling.children[0];
+
+    activePageLink.classList.remove("selected");
+    nextPageLink.classList.add("selected");
+
+    setLastPageIndex(lastNum);
+
+    setPageIndex((prevState) => prevState + 1);
+  };
+
+  useEffect(() => {
+    const prevBtn = document.querySelector(".page-link.prev");
+    const nextBtn = document.querySelector(".page-link.next");
+
+    if (pageIndex > 1) {
+      prevBtn.classList.remove("disabled");
+    } else {
+      prevBtn.classList.add("disabled");
+    }
+
+    if (pageIndex < lastPageIndex) {
+      nextBtn.classList.remove("disabled");
+    } else {
+      nextBtn.classList.add("disabled");
+    }
+  }, [pageIndex, lastPageIndex]);
   // Change Page
   //* 3. Custom Pagination
 
@@ -192,6 +240,9 @@ const App = () => {
               pageSize={pageSize}
               totalItems={filteredPokemons?.length}
               paginate={paginate}
+              prev={prev}
+              next={next}
+              getLastPageIndex={getLastPageIndex}
             />
             //* 3. Custom Pagination
           }

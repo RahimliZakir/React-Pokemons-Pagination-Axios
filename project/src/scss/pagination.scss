@@ -134,8 +134,30 @@
   margin-top: 3.5%;
 }
 
+.page-link {
+  user-select: none;
+}
+
 .page-link.selected {
   background-color: #0d6efd;
   color: #ffffff;
+}
+
+.page-link.prev,
+.page-link.next {
+  cursor: pointer;
+  color: #0d6efd;
+}
+
+.page-link.prev.disabled,
+.page-link.next.disabled {
+  pointer-events: none;
+  cursor: default;
+  color: grey;
+}
+
+.page-link.prev.disabled:hover,
+.page-link.next.disabled:hover {
+  background-color: white;
 }
 //* 3. Custom Pagination

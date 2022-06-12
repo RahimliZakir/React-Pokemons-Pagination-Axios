@@ -10,8 +10,8 @@ const Pokemon = ({ cardItem, cardIndex, loading }) => {
   }
 
   return (
-    <Col md={3} className="mt-5">
-      <Card style={{ width: "18rem" }}>
+    <Col xl={3} lg={3} md={3} sm={12} className="mt-5">
+      <Card>
         <Card.Img
           variant="top"
           src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${cardIndex}.png`}
