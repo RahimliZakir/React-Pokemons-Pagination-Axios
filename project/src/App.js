@@ -15,6 +15,10 @@ import Pokemon from "./components/Pokemon";
 //TODO: 1. External JS - import like style
 //* 2. react-paginate
 
+//* 3. Custom Pagination
+import CustomPagination from "./components/CustomPagination";
+//* 3. Custom Pagination
+
 //TODO: 2. External JS - with custom hook
 // import ExternalJS from "./components/ExternalJS";
 //TODO: 2. External JS - with custom hook
@@ -33,17 +37,27 @@ const App = () => {
   // }, []);
   //TODO: 3. External JS - componentDidMount - useEffect
 
+  //* 3. Custom Pagination
+  const [loading, setLoading] = useState(false);
+  const [pageIndex, setPageIndex] = useState(1);
+  const pageSize = 15;
+  //* 3. Custom Pagination
+
   const searchRef = useRef(null);
   const [pokemons, setPokemons] = useState([]);
   const [search, setSearch] = useState("");
 
   const getPokemons = async () => {
+    setLoading(true);
+
     const { data } = await API.get("/pokemon", {
       params: {
         limit: 150,
       },
     });
     setPokemons(data);
+
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -104,6 +118,21 @@ const App = () => {
   // };
   //* 2. react-paginate
 
+  //* 3. Custom Pagination
+  // Get Current Pokemons
+  const indexOfLastPokemon = pageIndex * pageSize;
+  const indexOfFirstPokemon = indexOfLastPokemon - pageSize;
+  const currentPokemons = filteredPokemons?.slice(
+    indexOfFirstPokemon,
+    indexOfLastPokemon
+  );
+  // Get Current Pokemons
+
+  // Change Page
+  const paginate = (pageNumber) => setPageIndex(pageNumber);
+  // Change Page
+  //* 3. Custom Pagination
+
   return (
     <div className="App py-3">
       <Container>
@@ -118,10 +147,11 @@ const App = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           </Col>
-          {filteredPokemons?.map((item) => {
+          {currentPokemons?.map((item) => {
             return (
               <Pokemon
                 key={item.url}
+                loading={loading}
                 cardItem={item}
                 cardIndex={item.url.slice(33, item.url.length - 1)}
               />
@@ -150,6 +180,13 @@ const App = () => {
             //   renderOnZeroPageCount={null}
             // />
             //* 2. react-paginate
+            //* 3. Custom Pagination
+            <CustomPagination
+              pageSize={pageSize}
+              totalItems={filteredPokemons?.length}
+              paginate={paginate}
+            />
+            //* 3. Custom Pagination
           }
         </Row>
       </Container>

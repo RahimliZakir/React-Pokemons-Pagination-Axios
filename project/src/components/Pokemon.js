@@ -4,7 +4,11 @@ import { capitalize } from "../utils/capitalize";
 
 import { Col, Card } from "react-bootstrap";
 
-const Pokemon = ({ cardItem, cardIndex }) => {
+const Pokemon = ({ cardItem, cardIndex, loading }) => {
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Col md={3} className="mt-5">
       <Card style={{ width: "18rem" }}>
