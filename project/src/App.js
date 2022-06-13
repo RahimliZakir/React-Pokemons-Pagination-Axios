@@ -69,6 +69,8 @@ const App = () => {
   //! Burada Re-render-in qarshisini almaq uchun deyirem ki, Eger ya "search" ya "pokemons" deyishse tezeden map ele, olmasa eleme!
   const filteredPokemons = useMemo(() => {
     return pokemons?.results?.filter((item) => {
+      setPageIndex(1);
+
       if (search === "") {
         return pokemons;
       } else {
@@ -122,7 +124,7 @@ const App = () => {
   // Get Current Pokemons
   const indexOfLastPokemon = pageIndex * pageSize;
   const indexOfFirstPokemon = indexOfLastPokemon - pageSize;
-  const currentPokemons = filteredPokemons?.slice(
+  const paginatedPokemons = filteredPokemons?.slice(
     indexOfFirstPokemon,
     indexOfLastPokemon
   );
@@ -202,7 +204,7 @@ const App = () => {
               onChange={(e) => setSearch(e.target.value)}
             />
           </Col>
-          {currentPokemons?.map((item) => {
+          {paginatedPokemons?.map((item) => {
             return (
               <Pokemon
                 key={item.url}
