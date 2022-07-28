@@ -1,4 +1,4 @@
-# React Application With Custom Pagination, Axios & Filter Logic.
+# React Application With Custom Pagination, Axios & Filter Logics.
 
 ### Used resources:
 - For API - [Pokemons API](https://pokeapi.co/)
